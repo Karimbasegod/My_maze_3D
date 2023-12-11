@@ -1,6 +1,6 @@
 #include "header.h"
 
-/* global variables */
+/* Global variables */
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Texture *texture;
@@ -19,69 +19,69 @@ double time;
  */
 int main(int argc, char *argv[])
 {
-	int *maze; /* 2D array defining maze map */
-	char *mapName;
-	bool textured;
+    int *maze;    /* 2D array defining maze map */
+    char *mapName;
+    bool textured;
 
-	/* initial values for global variables */
-	pos.x = 1;
-	pos.y = 12;
-	dir.x = 1;
-	dir.y = -0.66;
-	plane.x = 0;
-	plane.y = 0.66;
-	time = 0;
+    /* Initial values for global variables */
+    pos.x = 1;
+    pos.y = 12;
+    dir.x = 1;
+    dir.y = -0.66;
+    plane.x = 0;
+    plane.y = 0.66;
+    time = 0;
 
-	/* check user arguments and set options */
-	mapName = "\0";
-	textured = true;
-	if (argc == 3)
-	{
-		if (strcmp(argv[2], "no_tex") == 0)
-			textured = false;
-		mapName = argv[1];
-	}
-	else if (argc == 2)
-	{
-		if (strcmp(argv[1], "no_tex") == 0)
-		{
-			mapName = "maps/map_0";
-			textured = false;
-		}
-		else
-			mapName = argv[1];
-	}
-	else if (argc == 1)
-		mapName = "maps/map_0";
+    /* Check user arguments and set options */
+    mapName = "\0";
+    textured = true;
+    if (argc == 3)
+    {
+        if (strcmp(argv[2], "no_tex") == 0)
+            textured = false;
+        mapName = argv[1];
+    }
+    else if (argc == 2)
+    {
+        if (strcmp(argv[1], "no_tex") == 0)
+        {
+            mapName = "maps/map_0";
+            textured = false;
+        }
+        else
+            mapName = argv[1];
+    }
+    else if (argc == 1)
+        mapName = "maps/map_0";
 
-	/* start SDL and create window and renderer */
-	if (!initSDL())
-		return (1);
+    /* Start SDL and create window and renderer */
+    if (!initSDL())
+        return 1;
 
-	/* parse maze file */
-	maze = NULL;
-	maze = parseMap(mapName, maze);
-	if (maze == NULL)
-		return (1);
+    /* Parse maze file */
+    maze = NULL;
+    maze = parseMap(mapName, maze);
+    if (maze == NULL)
+        return 1;
 
-	if (textured)
-		loadTextures(mapName);
+    if (textured)
+        loadTextures();
 
-	/* loops until user exits by ESC or closing window */
-	while (!quit())
-	{
-		if (!textured)
-			renderBGFlat();
+    /* Loops until user exits by ESC or closing window */
+    while (!quit())
+    {
+        if (!textured)
+            renderBGFlat();
 
-		/* draw walls, textured floor, and textured ceiling */
-		raycaster(maze, textured);
+        /* Draw walls, textured floor, and textured ceiling */
+        raycaster(maze, textured);
 
-		/* handles user input */
-		input(maze);
-	}
+        /* Handles user input */
+        input(maze);
+    }
 
-	/* close SDL, renderer, and window */
-	closeSDL();
-	free(maze);
-	return (0);
+    /* Close SDL, renderer, and window */
+    closeSDL();
+    free(maze);
+    return 0;
 }
