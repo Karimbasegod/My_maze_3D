@@ -58,3 +58,4 @@ Example:
 ..... Author
 - Mohamed karim yacoubi
 - https://www.linkedin.com/in/mohamed-karim-yacoubi-73592b270/
+- https://www.linkedin.com/posts/mohamed-karim-yacoubi-73592b270_exploring-3d-mazes-a-solo-coding-odyssey-activity-7140344432133853187-HBLS?utm_source=share&utm_medium=member_desktop
